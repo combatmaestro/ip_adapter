@@ -79,6 +79,9 @@ class IPAdapter:
         config = CLIPVisionConfig.from_json_file(config_path)
         state_dict = torch.load(model_path, map_location="cpu")
 
+        # ✅ Fix: Remove problematic key before loading
+        state_dict.pop("vision_model.embeddings.position_ids", None)
+
         self.image_encoder = CLIPVisionModelWithProjection(config)
         self.image_encoder.load_state_dict(state_dict)
         self.image_encoder = self.image_encoder.to(self.device, dtype=torch.float16)
