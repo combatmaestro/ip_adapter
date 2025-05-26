@@ -70,7 +70,7 @@ class IPAdapter:
         self.ip_ckpt = ip_ckpt
         self.num_tokens = num_tokens
 
-        self.pipe = sd_pipe.to(self.device)
+        self.pipe = sd_pipe
         self.set_ip_adapter()
 
         # ✅ Load image encoder from local config and weights
